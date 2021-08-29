@@ -1,0 +1,140 @@
+
+
+#logo{
+    width:200px;
+    
+}
+
+.navbar{
+    background-color:#f3e9f1 !important;
+    margin-bottom:30px;
+}
+
+.nav-item{
+    margin-right:20px;
+}
+
+.container-fluid{
+    display:flex;
+    justify-content:space-between;
+}
+
+#navbarSupportedContent{
+    max-width:300px;
+}
+
+.bi-cart3{
+    font-size:20px;
+}
+
+.image-accueil{
+    width:200px !important;
+    
+}
+
+.container{
+    margin-top:30px;
+    
+}
+
+.containerProduct{
+    max-width:800px;
+    display:flex;
+    flex-direction:row;
+    &__infos{
+        margin-right:10px;
+        min-width:300px;
+    }
+    &__imageDiv{
+        max-width:50%;
+        &__picture{
+            width:100%;
+        }
+    }
+}
+
+
+
+.col-12 , .col-6{
+    display:flex !important;
+    justify-content:center !important;
+    border:10px solid rgb(225, 225, 225) !important;
+    margin-top:10px;
+}
+
+
+.col-6{
+    display:flex;
+    align-items:center;
+}
+
+.accueil-name{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.accueil-price{
+    font-size:30px;
+    
+}
+
+.list-group-item{
+    width:50%;
+}
+
+.flexContainer{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.container{
+    margin-top:0px !important;
+}
+
+.quantityAlert{
+    color:red;
+    visibility:hidden;
+}
+
+@media(max-width:650px){
+    .containerProduct{
+        flex-direction:column;
+    }
+}
+
+//--Panier LIST
+.panierList{
+    max-width:700px;
+    display:flex;
+    align-items:center;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space:nowrap;
+    &__imgSlot{
+        &__miniImage{
+            width:30px;
+        }
+    }
+    &__name{
+        font-weight:800;
+    }
+    &__noBorder{
+        border-color:white;
+    }
+    &__wholeTotalPrice{
+        border:1px solid black !important; 
+        font-weight:900;
+        text-transform: uppercase;
+    }
+}
+
+.totalLine{
+    margin-top:10px;
+}
+
+.panierContainer{
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+}
+
