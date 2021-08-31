@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +15,7 @@
 </head>
 <body>
 
-
+<!--NAVBAR-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="index.html"><img id="logo" src="logo.png"></a>
@@ -47,9 +47,8 @@
         </div>
       </nav>
 
-
+<!--PAGE CONTENT-->
       <div class="container panierContainer">
-
         <ul class="list-group list-group-horizontal-sm panierList">
             <li class="list-group-item panierList__imgSlot">Image</li>
             <li class="list-group-item panierList__name">Nom</li>
@@ -73,9 +72,39 @@
             <li class="list-group-item panierList__wholeTotalPrice">PT</li>
           </ul>
           -->
-          
           </ul>
       </div>
-    
+<!--FORM to SUBMIT-->
+      <form name="ccform">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+          <i class="bi bi-exclamation-circle-fill"></i>
+          <!--<div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>-->
+          
+        </div>
+        <div class="mb-3">
+          <label for="firstName" class="form-label">Prénom</label>
+          <input type="text" class="form-control" id="firstName" required>
+          <i class="bi bi-exclamation-circle-fill"></i>
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="lastName" required>
+            <i class="bi bi-exclamation-circle-fill"></i>
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Adresse</label>
+            <input type="text" class="form-control" id="address" required>
+        </div>
+        <div class="mb-3">
+            <label for="city" class="form-label">Ville</label>
+            <input type="text" class="form-control" id="city" required>
+            <i class="bi bi-exclamation-circle-fill"></i>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      
 </body>
 </html>

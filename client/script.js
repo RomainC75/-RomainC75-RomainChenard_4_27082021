@@ -43,7 +43,10 @@ for (let url of Object.keys(wholeURLs)){
     fetchElement(wholeURLs[url]);
 }
 
-//change the "shopping icon" if there is any item in sessionStorage
+
+//----- Basket and Init Button Section--------
+
+//change the "basket icon" according to the state of the value of 'listToBuy'
 const basket = () => {
     if (sessionStorage.getItem('listToBuy')){
         document.querySelector('.basket').innerHTML='<i class="bi bi-cart-fill"></i>';
@@ -51,6 +54,31 @@ const basket = () => {
         document.querySelector('.basket').innerHTML='<i class="bi bi-cart"></i>';
     }
 }
-
 basket();
+
+
+const initButton = document.querySelector('.initButton');
+//modifiy the aspect of the initButton "Vider le panier"
+const initEmptyButton = () => {
+    if (sessionStorage.getItem('listToBuy')){
+        initButton.style.backgroundColor="blue";
+        initButton.style.cursor="pointer";
+    }else{
+        initButton.style.backgroundColor="grey";
+        initButton.style.cursor="default";
+    }
+}
+initEmptyButton();
+
+//action if someone click on the iniButton "vider le panier"
+initButton.addEventListener('click', e => {
+    if(sessionStorage.getItem('listToBuy')){
+        sessionStorage.clear();
+        document.location.reload();
+    }
+    
+})
+
+
+console.log("sessionStorage",sessionStorage);
 

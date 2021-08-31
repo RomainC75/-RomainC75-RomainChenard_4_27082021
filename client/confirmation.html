@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orinoco - site de ventes </title>
+    <title>Orinoco - Confirmation</title>
     <!--BOOTSTRAP-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous defer"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!--PERSO-->
     <link href="style.css" rel="stylesheet" type="text/css">
-    <script src="script.js" defer></script>
+    <script src="confirmation.js" defer></script>
 </head>
 <body>
 
@@ -22,38 +22,51 @@
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse confirmationNav" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
               </li>
-
-              <!--<li class="nav-item">
-                <a class="nav-link" href="produit.html">Produits</a>
-              </li>-->
-              
-              <li class="nav-item">
-                <a class="nav-link basket" href="panier.html"><i class="bi bi-cart"></i></span></a>
-              </li>
-            </ul>
-            <!--
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            -->
           </div>
         </div>
     </nav>
 
+      <div class="confirmationPageContainer">
+      <div class="confirmationTitle"> 
+        <h1>Orinoco vous remercie pour votre commande !</h1>
+        <h2>Vous trouverez ci-dessous les information la concernant :</h2>
+      </div>
 
-    <div class="container">
-    </div>
 
-    <div class="initButton">
-      <p>Vider le panier</p>
-    </div>
+      <div class="container tableContainer">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">type</th>
+              <th scope="col">Information</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">email</th>
+              <td id="eMail"></td>
+
+            </tr>
+            <tr>
+              <th scope="row">prix total</th>
+              <td id="totalPrice"></td>
+
+            </tr>
+            <tr>
+              <th scope="row">n° de commande</th>
+              <td id="orderId"></td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
     
 </body>
 </html>
