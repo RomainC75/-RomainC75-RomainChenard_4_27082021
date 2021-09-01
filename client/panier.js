@@ -1,4 +1,5 @@
 
+
 //change the "shopping icon" if there is any item in sessionStorage
 const basket = () => {
     if (sessionStorage.getItem('listToBuy')){
@@ -53,7 +54,8 @@ console.log("isPeluche",isPeluche());
 
 //If there is no Teddy in the basket
 //old peluche test : !objProductsToBuy["5be9c8541c9d440000665243"]
-if (parseSessionStorage(sessionStorage.getItem('listToBuy')) &&  !isPeluche() || Object.keys(sessionStorage).length==1){
+
+if (parseSessionStorage(sessionStorage.getItem('listToBuy')) &&  !isPeluche() || Object.keys(sessionStorage).length<=4){
     console.log('NON TEDDY');
     document.querySelector('.panierContainer').style.display="none";
     document.querySelector('form').style.display="none";
