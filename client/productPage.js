@@ -122,7 +122,6 @@ for (let option of options){
             }
         }
     });
-
 }
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
@@ -160,23 +159,21 @@ quantityButtonPlus.addEventListener('click', e => {
     console.log(quantityVariable);
 });
 
-
 quantityInput.addEventListener('input', (e) => {
-   
-   if(parseInt(quantityInput.value)<0){
+   if(e.target.value.match(/[^0-9]/)){
+    quantityAlert.style.visibility="visible";
+    quantityVariable=0;
+   }else if(parseInt(quantityInput.value)<0){
        quantityAlert.style.visibility="visible";
         quantityVariable=0;
-   }else if ( parseInt(quantityInput.value)>30){
+   }else if (parseInt(quantityInput.value)>30){
         quantityAlert.style.visibility="visible";
-        quantityVariable=30;
-   }
-   if(parseInt(e.target.value)>=0 && parseInt(e.target.value)<=30){
+        quantityVariable=0;
+   }else if(parseInt(e.target.value)>=0 && parseInt(e.target.value)<=30){
         quantityVariable=e.target.value;
         quantityAlert.style.visibility="hidden";
    }
-   console.log(quantityVariable);
-
-   
+   console.log(quantityVariable); 
 });
 
 //validate Button
@@ -184,7 +181,7 @@ document.getElementById('validate').addEventListener('click', (e) => {
     if(quantityVariable==0) {
         quantityAlert.style.visibility="visible";
     }
-    if(quantityVariable>0){
+    if(quantityVariable>0 && quantityVariable<=30){
         console.log(sessionStorage.getItem('listToBuy'));
         if(sessionStorage.getItem('listToBuy')){
             sessionStorage.setItem('listToBuy',sessionStorage.getItem('listToBuy')+":"+ItemTypeSSArray[optionNumber]._id+":"+quantityVariable.toString());
@@ -196,10 +193,12 @@ document.getElementById('validate').addEventListener('click', (e) => {
             ListObj.update(sessionStorage.getItem('listToBuy'));
             sessionStorage.setItem('listToBuy',ListObj.stringify());
         }
+        quantityInput.value="";
     }
     console.log("sessionStorage",sessionStorage.getItem('listToBuy'));
     basket();
-    
 });
 
 basket();
+
+console.log(234,convert("euro",-234));

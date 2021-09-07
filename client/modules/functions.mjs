@@ -15,6 +15,7 @@ const deviseBTHtmlIconsObjet={
 };
 
 const format = (devise, price) => {
+    if(typeof(price)!="number")return false;
     array=price.toString().split('.');
     //put space between the int part numbers
     console.log("array after Split",array);
@@ -32,12 +33,12 @@ const format = (devise, price) => {
     }else{
         return separetedintPart+" "+deviseObject[devise];
     }
-    
 }
 
 //argument  : value (int)
 //return the converted value
 const convert = (devise,value) => {
+    //if(typeof(value)!="number" || value<=0) return false;
     if(devise=="euro"){
         return value*0.0077;
     }else if(devise=="dollar"){
