@@ -1,61 +1,22 @@
-
+//init the Object with the data in sessionStorage
+const ListObj=new ListToBuy(sessionStorage.getItem('listToBuy'));
 
 //change the "shopping icon" if there is any item in sessionStorage
-const basket = () => {
-    if (sessionStorage.getItem('listToBuy')){
-        document.querySelector('.basket').innerHTML='<i class="bi bi-cart-fill"></i>';
-    }else{
-        document.querySelector('.basket').innerHTML='<i class="bi bi-cart"></i>';
-    }
-}
 basket();
 
-
-const teddiesObj=JSON.parse(sessionStorage.getItem("teddies"));
-console.log("teddiesObj",teddiesObj);
-
-//parse the string in SessionStorage
-////
-//  _id:number:_id:number
-////
-//return an objet "ItemId : quantity"
-
-const parseSessionStorage = (str) => {
-    if(str != null){
-        const obj={};
-        const array=str.split(':');
-        console.log("str",array);
-        for (let i=0 ; i<array.length-1 ; i=i+2){
-            !obj[array[i]] ? obj[array[i]]=parseInt(array[i+1]) : obj[array[i]]=obj[array[i]]+parseInt(array[i+1]);
-        }
-        return obj;
-    }else{
-        return 0;
-    }
-}
 console.log("sessionStorageSTR",sessionStorage.getItem('listToBuy'));
+console.log("ListObj.getItemsList",ListObj.getItemsList);
 
-const objProductsToBuy = parseSessionStorage(sessionStorage.getItem('listToBuy'));
-
-const isPeluche = () => {
-    //console.log("object.keys returns ",Object.keys(objProductsToBuy));
-    return Object.keys(objProductsToBuy).some( x => {
-        //console.log("-------");
-        return teddiesObj.some(y=> {
-            //console.log("productToBuy,Teddies",x,y["_id"]);
-            return x==y["_id"];
-        });
-
-    });
-}
-
-console.log("isPeluche",isPeluche());
+//Create the deviseLinks
+const deviseIconPlace=document.getElementsByClassName('deviseIcon')[0];
+//initialisation
+deviseIconPlace.innerHTML=`${deviseBTHtmlIconsObjet[sessionStorage.getItem('devise')]}`;
 
 
 //If there is no Teddy in the basket
 //old peluche test : !objProductsToBuy["5be9c8541c9d440000665243"]
 
-if (parseSessionStorage(sessionStorage.getItem('listToBuy')) &&  !isPeluche() || Object.keys(sessionStorage).length<=4){
+if (ListObj.parseStrList(sessionStorage.getItem('listToBuy')) &&  !ListObj.isThereAnyTeddyInTheList()){
     console.log('NON TEDDY');
     document.querySelector('.panierContainer').style.display="none";
     document.querySelector('form').style.display="none";
@@ -69,9 +30,7 @@ if (parseSessionStorage(sessionStorage.getItem('listToBuy')) &&  !isPeluche() ||
     //throw new Error("ERROR : no Teddie !")
 }
 
-
-
-
+//concentrate 3 arrays ('teddies','furniure' and 'cameras') in one.
 const bigJSON=JSON.parse(sessionStorage.getItem('cameras')).concat(JSON.parse(sessionStorage.getItem('furniture'))).concat(JSON.parse(sessionStorage.getItem('teddies')));
 console.log("bigJSON",bigJSON);
 
@@ -80,38 +39,37 @@ console.log("bigJSON",bigJSON);
 const createProductLine = (id,quantity) => {
     const lineInfos=bigJSON.filter(x=>x["_id"]==id);
     console.log("lineInfo",lineInfos);
-    const ul = document.createElement('ul');
-    ul.classList.add('list-group','list-group-horizontal-sm','panierList');
-    const content=`<li class="list-group-item panierList__imgSlot"><img class="panierList__imgSlot__miniImage" src="${lineInfos[0].imageUrl}"></li>
-    <li class="list-group-item panierList__name">${lineInfos[0].name}</li>
-    <li class="list-group-item panierList__unitPrice">${lineInfos[0].price}</li>
-    <li class="list-group-item panierList__qty">${quantity}</li>
-    <li class="list-group-item panierList__totalPrice">${parseInt(lineInfos[0].price)*quantity}</li>`;
-    ul.innerHTML=content;
+    const tr = document.createElement('tr');
+    //ul.classList.add('list-group','list-group-horizontal-sm','panierList');
+    const content=`<td>
+            <div class="product-item">
+                <a class="product-thumb" href="#"></a><img class="miniImage" src="${lineInfos[0].imageUrl}" alt="Product"></a>
+                <div class="product-info">
+                    <h4 class="product-title"><div class="product-title__name">${lineInfos[0].name}</div></h4>
+                </div>
+            </div>
+        </td>
+        <td class="text-center text-lg text-medium quantityLine">${quantity}</td>
+        <td class="text-center text-lg text-medium unitPriceLine">${lineInfos[0].price}</td>
+        <td class="text-center text-lg text-medium subTotalPriceLine">${parseInt(lineInfos[0].price)*quantity}</td>
+        <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="" data-original-title="Remove item"><i class="fa fa-trash deleteItemTrash"></i></a></td>
+        <!--id=${id} basePrice=${lineInfos[0].price} baseSumPrice=${parseInt(lineInfos[0].price)*quantity}-->`;
+    tr.innerHTML=content;
     //add it to the DOM
-    const divPanierContainer=document.getElementsByClassName('panierContainer')[0];
-    divPanierContainer.appendChild(ul);
+    const divPanierContainer=document.getElementsByTagName('tbody')[0];
+    divPanierContainer.appendChild(tr);
     return parseInt(lineInfos[0].price)*quantity;
 }
 
 //create in the DOM one line with the total price
 //argument : just the total price to print
 const createTotalPriceLine = (price) => {
-    const totalLine = document.createElement('ul');
-    totalLine.classList.add('list-group','list-group-horizontal-sm','panierList','totalLine');
-    const content=`<li class="list-group-item panierList__noBorder"></li>
-    <li class="list-group-item panierList__noBorder"></li>
-    <li class="list-group-item panierList__wholeTotalPrice">Total</li>
-    <li class="list-group-item panierList__wholeTotalPrice">${price}</li>`;
+    const totalLine = document.createElement('div');
+    totalLine.classList.add("column", "text-lg", "totalPriceContainer");
+    const content=`TOTAL: <span class="text-medium totalPrice">${price}</span><!--totalPrice=${price}-->`;
     totalLine.innerHTML=content;
-    document.getElementsByClassName('panierContainer')[0].appendChild(totalLine);
-
-
+    document.getElementsByClassName("shopping-cart-footer")[0].appendChild(totalLine);
 }
-
-
-
-console.log("objProductsToBuy -> ",objProductsToBuy);
 
 //create all the lines
 //argument : objet passed through sessionStorage
@@ -125,19 +83,59 @@ const createProductLineS = (obj) => {
         for (key of Object.keys(obj)){
             total+=createProductLine(key,parseInt(obj[key]));
         }
+
         createTotalPriceLine(total);
         console.log(total);
         return 1;
     }
 }   
-createProductLineS(objProductsToBuy);
+createProductLineS(ListObj.getItemsList);
 
-console.log("test",createProductLineS(3));
+//console.log("test",createProductLineS(3));
+//------------------------------------Devise-----
 
+const refreshTotalPriceConvertion = () => {
+    const totalPriceSelector=document.getElementsByClassName('totalPrice')[0];
+    
+    const totalPrice=getTheHiddenTotalPrice(totalPriceSelector.parentNode);
+    totalPriceSelector.textContent=deviseFormat(sessionStorage.getItem('devise'),parseInt(totalPrice));
+}
 
+refreshTotalPriceConvertion();
+
+const refreshProductPricesConvertion = () => {
+    const unitPricesArray=document.getElementsByClassName('unitPriceLine');
+    for (let unitPrice of unitPricesArray){
+        const basePrice=getTheHiddenBasePrice(unitPrice.parentNode);
+        unitPrice.textContent=deviseFormat(sessionStorage.getItem('devise'),parseInt(basePrice));
+    }
+    const sumPricesArray=document.getElementsByClassName('subTotalPriceLine');
+    for (let sumPrice of sumPricesArray){
+        const baseSumPrice=getTheHiddenBaseSumPrice(sumPrice.parentNode);
+        sumPrice.textContent=deviseFormat(sessionStorage.getItem('devise'),parseInt(baseSumPrice));
+    }
+}
+
+refreshProductPricesConvertion(sessionStorage.getItem('devise'));
+
+const createDeviseLinks = () => {
+    const deviseLinksArray=document.getElementsByClassName('deviseToClic');
+    for (deviseLink of deviseLinksArray){
+        deviseLink.addEventListener('click', e => {
+            const devise=e.target.textContent.toLowerCase();
+            deviseIconPlace.innerHTML=`${deviseBTHtmlIconsObjet[devise]}`;
+            sessionStorage.setItem('devise',devise); 
+            //refreshProduitPrice('keyPrice');
+            refreshProductPricesConvertion(devise);
+            refreshTotalPriceConvertion(devise);
+        });
+    }
+}
+
+createDeviseLinks();
 
 orderObject={
-    products:objProductsToBuy
+    products:ListObj.getItemsList
 }
 
 //goal : create the "PRODUCTS" part of the object to send
@@ -151,16 +149,20 @@ const productsPartCreator = (obj) => {
         }
     }
     //ATTENTION : a filter is added to fit to the API properties
-    const teddyFilteredArray =[];
+    
+    /*const teddyFilteredArray =[];
     for (let product of productsPartArray){
-        if(teddiesObj.some(teddy => teddy["_id"]==product)){
+        if(JSON.parse(sessionStorage.getItem("teddies")).some(teddy => teddy["_id"]==product)){
             teddyFilteredArray.push(product);
         }
     }
     return teddyFilteredArray;
+    */
+    return ListObj.teddyFilter(productsPartArray);
+
 }
-console.log("productsPartsCreator",productsPartCreator(objProductsToBuy));
-console.log("productsPartArrayFILTERED",productsPartCreator(objProductsToBuy));
+console.log("productsPartsCreator",productsPartCreator(ListObj.getItemsList));
+console.log("productsPartArrayFILTERED",productsPartCreator(ListObj.getItemsList));
 
 
 //goal : create the "CONTACT" part of the object to send
@@ -175,6 +177,25 @@ const contactPartCreator = () => {
     return contactPartObject;
 }
 
+//Clear Cart Button
+const clearCartButton=document.getElementById('clearCart');
+
+clearCartButton.addEventListener('click', e => {
+    if(sessionStorage.getItem('listToBuy')){
+        ListObj.clearAllItems();
+        basket();
+        document.location.reload();
+    }
+});
+
+const deleteItemTrashArray=document.getElementsByClassName('deleteItemTrash');
+for (let deleteItem of deleteItemTrashArray){
+    deleteItem.addEventListener('click', e => {
+        const idToDelete=deleteItem.parentNode.parentNode.parentNode.innerHTML.match(/id=([0-9abcdef]{24})/)[1];
+        ListObj.deleteItem(idToDelete);
+
+    })
+}
 
 //////////////////////////////COLOR INDICATOR /////////////////////
 const nameColorProtection = (element) => {
@@ -192,10 +213,23 @@ const nameColorProtection = (element) => {
     })
 }
 
-
 const mailColorProtection = (element) => {
     element.addEventListener('input' , e => {
         if (!e.target.value.match(/.+@.+\.[a-zA-Z]{2,4}/)){
+            element.style.boxShadow='0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 34, 34, 0.6)';
+            element.nextSibling.nextSibling.style.visibility="visible";
+            return 0;
+        }else{
+            element.style.boxShadow='0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(34, 167, 255, 0.6)';
+            element.nextSibling.nextSibling.style.visibility="hidden";
+            return 1;
+        }
+    })
+}
+
+const min5ColorProtection = (element) => {
+    element.addEventListener('input' , e => {
+        if (!e.target.value.match(/.{5,}/)){
             element.style.boxShadow='0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 34, 34, 0.6)';
             element.nextSibling.nextSibling.style.visibility="visible";
             return 0;
@@ -211,7 +245,7 @@ nameColorProtection(document.getElementById("firstName"));
 nameColorProtection(document.getElementById("lastName"));
 nameColorProtection(document.getElementById("city"));
 mailColorProtection(document.getElementById('email'));
-
+min5ColorProtection(document.getElementById('address'));
 
 ////////////////////////////Protection before sending message///////////
 const onlyTextCheck = (text) => {
@@ -220,21 +254,22 @@ const onlyTextCheck = (text) => {
 const mailCheck = (email) => {
     return email.match(/.+@.+\.[a-zA-Z]{2,4}/) ? 1 : 0;
 }
-
-
+const min5Letters = (text) => {
+    return typeof(text)=="string" && text.match(/.{5,}/) ? 1 : 0;
+}
 
 const formCheckingFonction= () => {
     const ccForm = document.forms["ccform"];
     console.log(ccForm[0].value);
-    if (mailCheck(ccForm[0].value) && onlyTextCheck(ccForm[1].value)  && onlyTextCheck(ccForm[2].value) && onlyTextCheck(ccForm[4].value)) {
+    if (mailCheck(ccForm[0].value) && onlyTextCheck(ccForm[1].value) && onlyTextCheck(ccForm[2].value) && min5Letters(ccForm[3].value) && onlyTextCheck(ccForm[4].value)) {
         console.log("OK");
         return 1;
+    }else{
+        return 0; 
     }
 }
 
-
 //------submit Function-----------------
-
 document.querySelector('button[type="submit"]').addEventListener('click',e => {
     e.preventDefault();
 
@@ -243,7 +278,7 @@ document.querySelector('button[type="submit"]').addEventListener('click',e => {
             
         const finalObject={
             contact:contactPartCreator(),
-            products:productsPartCreator(objProductsToBuy)
+            products:productsPartCreator(ListObj.getItemsList)
         }
         
         //send the request with the object AND reset the order Memory
@@ -260,14 +295,6 @@ document.querySelector('button[type="submit"]').addEventListener('click',e => {
             console.log("RESPONSE",json);
             sessionStorage.setItem("response",JSON.stringify(json));
             window.location.href="./confirmation.html";
-
         }).catch(err=> console.log(err)); 
     }
-
-   
 });
-
-
-
-
-

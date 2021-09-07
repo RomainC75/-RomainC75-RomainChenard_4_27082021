@@ -10,8 +10,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous defer"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!--PERSO-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet"> 
     <link href="style.css" rel="stylesheet" type="text/css">
-    <script src="script.js" defer></script>
+    <script type="text/javascript" src="modules/functions.mjs" defer></script>
+    <script type="text/javascript" src="modules/objet.mjs" defer></script>
+    <script type="text/javascript"src="script.js" defer></script>
+    
 </head>
 <body>
 
@@ -23,7 +29,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav mb-2 mb-lg-0">
 
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
@@ -37,23 +43,59 @@
                 <a class="nav-link basket" href="panier.html"><i class="bi bi-cart"></i></span></a>
               </li>
             </ul>
-            <!--
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            -->
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Devise
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li class="deviseToClic">Yen</li>
+                <li class="deviseToClic">Euro</li>
+                <li class="deviseToClic">Dollar</li>
+              </ul>
+            </div>
+            <div class="deviseIcon ">
+              <i class="bi bi-currency-yen"></i>
+            </div>
           </div>
         </div>
-    </nav>
+    </nav>    
+    
+
+    <!--BOOTSTRAP-->
+
+  <div class="bienvenue">
+    <h1 class="bienvenue__h1">Bonjour, bienvenue sur le site d'Orinoco</h1>
+    <p class="bienvenue__p">Vous trouverez ici nos 3 catégories d'articles</p>
+  </div>
+  <div class="container accueil pb-5 mb-2">
 
 
-    <div class="container">
+    <!--
+    <div class="card" style="width: 18rem;">
+      <a href="#">
+      <img class="card-img-top" src="../images/oak_2.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Gamme</h5>
+        <h4 class="card-subtitle">Futniture</h4>
+        <p class="card-text">Prix :<mark>22.4e</mark></p>
+        
+        <div href="#" class="btn btn-primary">Cliquez sur la carte</div>
+      </a>
+      </div>
+    -->
+    </div>
+  
+    
     </div>
 
-    <div class="initButton">
+    <div class="initButton ">
       <p>Vider le panier</p>
     </div>
-    
+
+</div>
+
+
+
+
 </body>
 </html>

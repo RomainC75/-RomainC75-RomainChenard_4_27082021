@@ -9,13 +9,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous defer"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <!--PERSO-->
+    <!--Google-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <!--Perso-->
     <link href="style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="modules/functions.mjs" defer></script>
+    <script type="text/javascript" src="modules/objet.mjs" defer></script>
     <script src="productPage.js" defer></script>
 </head>
 <body>
-
-
+    <!--NavBar-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="index.html"><img id="logo" src="logo.png"></a>
@@ -23,98 +28,83 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 navbarRightSide">
 
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
               </li>
-
-              <!--<li class="nav-item">
-                <a class="nav-link" href="produit.html">Produits</a>
-              </li>-->
-              
               <li class="nav-item">
                 <a class="nav-link basket" href="panier.html"><i class="bi bi-cart"></i></span></a>
               </li>
             </ul>
-            <!--
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            -->
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Devise
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li class="deviseToClic">Yen</li>
+                <li class="deviseToClic">Euro</li>
+                <li class="deviseToClic">Dollar</li>
+              </ul>
+            </div>
+            <div class="deviseIcon">
+              <i class="bi bi-currency-yen"></i>
+            </div>
           </div>
         </div>
       </nav>
+      <!--Title-->
+      <div class="bienvenue">
+        <h1 class="bienvenue__h1">Page Produit</br></h1>
+        <p class="bienvenue__p">Veuillez selectionner l'option et la quantité de votre choix</p>
+      </div>
+      <!--Container for informations-->
+      <div class="container bootdey ">
+        <div class="col-md-12">
+          <section class="panel">
+            <div class="panel-body">
+              <div class="col-md-6 productImageContainer">
+                <div class="pro-img-details">
+                  <img src="" alt="" class="keyImageUrl">
+                </div>
 
-
-      <div class="container containerProduct">
-        <div class="containerProduct__infos">
-            
-            <ul class="list-group list-group-horizontal keyName">
-              <li class="list-group-item">Nom</li>
-              <li class="list-group-item">A second item</li>
-            </ul>
-            <ul class="list-group list-group-horizontal keyDescription">
-              <li class="list-group-item">Description</li>
-              <li class="list-group-item">A second item</li>
-            </ul>
-            <ul class="list-group list-group-horizontal keyPrice">
-              <li class="list-group-item">Prix</li>
-              <li class="list-group-item">A second item</li>
-            </ul>
-            
-            <ul class="list-group list-group-horizontal clicOption">
-              <li class="list-group-item">
-                <div class="container containerProduct flexContainer">
-                  <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                      Options
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    </ul>
+              </div>
+              <div class="col-md-6 infos">
+                <h4 class="pro-d-title infos__title">
+                  <a href="#" class="keyName">
+                    Leopard Shirt Dress
+                  </a>
+                </h4>
+                <p class="keyDescription infos__description">
+                    Praesent ac condimentum felis. Nulla at nisl orci, at dignissim dolor, The best product descriptions address your ideal buyer directly and personally. The best product descriptions address your ideal buyer directly and personally.
+                </p>
+                <div class="product_meta infos__option">
+                  <div class="container containerProduct flexContainer">
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Options
+                      </button>
+                      <ul class="dropdown-menu opa" aria-labelledby="dropdownMenuButton1">
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </li>
-            </ul>
+                <div class="m-bot15 infos__price"> <strong>Price : </strong><span class="pro-price keyPrice"> $300.00</span></div>
 
-            <ul class="list-group list-group-horizontal keyPrice">
-              <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Quantité</label>
-                <select id="quantity" class="form-select" id="inputGroupSelect01">
-                  <option selected value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </select>
+                <div class="form-group infos__quantity">
+                  <label>Quantity</label>  
+                  <div class="input-group mb-3 quantitySpinner">
+                    <div class="quantitySpinner__button inputMoins">-</div>
+                    <input id="quantity" maxlength="3" value="0" required>
+                    <div class="quantitySpinner__button inputPlus">+</div>
+                  </div>
+                  <div class="infos__quantity__quantityAlert quantityAlert">Veuillez selectionner en 1 et 30 articles</div>
+                </div>
               </div>
-              <div class="quantityAlert">Veuillez selectionner au moins un article</div>
-            </ul>
-            
-
-            <ul class="list-group list-group-horizontal ">
-              <li class="list-group-item flexContainer"><button id="validate" class="btn-secondary btn submitB" type="submit">Valider</button></li>
-              
-            </ul>
-
-            
-
+            </div>
+            <button id="validate" class="btn btn-round btn-primary" type="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+          </section>
         </div>
-        <div class="containerProduct__image">
-          <img class="containerProduct__imageDiv__picture keyImageUrl" src="">
-
-        </div>
-      </div>
-
-
-      
-      
+      </div> 
 </body>
 </html>

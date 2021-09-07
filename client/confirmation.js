@@ -9,10 +9,9 @@ const getTheTotalPrice = (orderedObj) => {
 
 console.log(getTheTotalPrice(obj));
 
-
-
 document.getElementById('eMail').innerText=obj.contact.email;
-document.getElementById('totalPrice').innerText=getTheTotalPrice(obj)+" ¥";
+//document.getElementById('totalPrice').innerText=getTheTotalPrice(obj)+" ¥";
+document.getElementById('totalPrice').innerText=deviseFormat(sessionStorage.getItem('devise'),parseInt(getTheTotalPrice(obj)));
 document.getElementById('orderId').innerText=obj.orderId;
 
 sessionStorage.clear();
