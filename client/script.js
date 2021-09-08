@@ -109,3 +109,5 @@ initButton.addEventListener('click', e => {
 //console.log("sessionStorage",sessionStorage);
 
 //console.log("getPrice",ListObj.getPrice("5be9c8541c9d440000665243"));
+
+initRate();

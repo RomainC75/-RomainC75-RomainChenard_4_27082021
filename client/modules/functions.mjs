@@ -8,6 +8,40 @@ const deviseObject={
     euro:"€"
 }
 
+const rate={
+    yen:1,
+    dollar:0.0091,
+    euro:0.0077,
+    eDollar:undefined,
+    eEuro:undefined,
+    date:undefined
+}
+
+const AccueilPrintConversionRates = () => {
+    const convertHeader=document.querySelector('.conversion__title');
+    const textC=`Taux de conversion au <br>${rate.date}`;
+    if(rate.date) convertHeader.innerHTML=textC;
+    const htmlDollarMarker=document.getElementById('convertRateUSD');
+    if (rate.eDollar) htmlDollarMarker.textContent=rate.eDollar;
+    const htmlEuroMarker=document.getElementById('convertRateEUR');
+    if (rate.eEuro) htmlEuroMarker.textContent=rate.eEuro;
+}
+
+const initRate = ()=> {
+    url="https://v6.exchangerate-api.com/v6/ef988f1b1049957f460cf310/latest/JPY";
+    fetch(url)
+        .then(rawJson => rawJson.json())
+        .then(json => {
+            rate.eDollar=json.conversion_rates.USD;
+            rate.eEuro=json.conversion_rates.EUR;
+            rate.date=json.time_last_update_utc.match(/\d{2} \w{3} \d{4}/)[0];
+            console.log("DATE",rate.date);
+            AccueilPrintConversionRates();
+        });
+}
+
+
+
 const deviseBTHtmlIconsObjet={
     yen:'<i class="bi bi-currency-yen"></i>',
     euro:'<i class="bi bi-currency-euro"></i>',
@@ -40,9 +74,12 @@ const format = (devise, price) => {
 const convert = (devise,value) => {
     //if(typeof(value)!="number" || value<=0) return false;
     if(devise=="euro"){
-        return value*0.0077;
+        //console.log("calcul", value*rate.eEuro , value*rate.euro);
+        return rate.eEuro ? value*rate.eEuro : value*rate.euro;
+        //return value*rate["euro"];
     }else if(devise=="dollar"){
-        return value*0.0091;
+        return rate.eDollar ? value*rate.eDollar : value*rate.dollar;
+        //return value*rate["dollar"];
     }else if(devise=="yen"){
         return value
     }else{

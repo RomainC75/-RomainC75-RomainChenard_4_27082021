@@ -224,6 +224,24 @@ ul.dropdown-menu.show.opa li:hover {
   width: 50%;
 }
 
+.conversion {
+  width: 300px;
+  box-shadow: 6px 6px 10px #e1e1e1;
+  border: 1px solid rgba(189, 189, 189, 0.125);
+  margin: 0 7% 20px auto;
+  border-radius: 0.25em;
+  text-align: center;
+  background: linear-gradient(45deg, #ffffff, #f8eff7) !important;
+}
+.conversion__title {
+  font-size: 20px;
+}
+.conversion__rate__data {
+  font-style: italic;
+  background-color: transparent;
+  font-weight: bold;
+}
+
 .bootdey {
   max-width: 1000px;
 }
